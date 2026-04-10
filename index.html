@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evanza Café – Ahmedabad</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f5efe4;
+  --dark: #1a1208;
+  --brown: #4a2e12;
+  --gold: #c8973a;
+  --mocha: #7a4f2d;
+  --light: #fdf8f0;
+  --text: #2e1a0a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--light);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(26,18,8,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,151,58,0.2);
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c8b89a;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+/* Hamburger for mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  width: 24px; height: 2px;
+  background: var(--gold);
+  transition: all 0.3s;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 65px; left: 0; right: 0;
+  background: rgba(26,18,8,0.98);
+  padding: 24px;
+  z-index: 99;
+  flex-direction: column;
+  gap: 20px;
+  border-bottom: 1px solid rgba(200,151,58,0.2);
+}
+
+.mobile-menu a {
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c8b89a;
+  text-decoration: none;
+}
+
+.mobile-menu.open { display: flex; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background:
+    linear-gradient(to bottom, rgba(26,18,8,0.75) 0%, rgba(26,18,8,0.4) 50%, rgba(26,18,8,0.85) 100%),
+    url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1400&q=80') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 60px;
+  position: relative;
+}
+
+.hero-tag {
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 10vw, 96px);
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  animation: fadeUp 0.8s 0.15s ease both;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-sub {
+  font-size: 15px;
+  color: #c8b89a;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  margin-top: 20px;
+  max-width: 400px;
+  line-height: 1.7;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  margin-top: 44px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeUp 0.8s 0.45s ease both;
+}
+
+.btn {
+  padding: 14px 32px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+  font-family: 'Jost', sans-serif;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--dark);
+  font-weight: 500;
+}
+
+.btn-gold:hover {
+  background: #e0ab44;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(200,151,58,0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid rgba(200,151,58,0.5);
+}
+
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeUp 1s 0.8s ease both;
+}
+
+.hero-scroll span {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #7a6a55;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ── ABOUT ── */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 80vh;
+}
+
+.about-img {
+  background: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80') center/cover no-repeat;
+  min-height: 400px;
+}
+
+.about-content {
+  background: var(--dark);
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-tag {
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.section-title em { font-style: italic; color: var(--gold); }
+
+.about-text {
+  font-size: 15px;
+  line-height: 1.85;
+  color: #9a8a75;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.about-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid #2e1e0e;
+}
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: #6a5a45;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* ── MENU ── */
+.menu-section {
+  padding: 100px 40px;
+  background: var(--light);
+  text-align: center;
+}
+
+.menu-section .section-tag,
+.menu-section .section-title { text-align: center; }
+.menu-section .section-title { color: var(--dark); margin-bottom: 60px; }
+
+.menu-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 50px;
+  border-bottom: 1px solid #e0d4c0;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 12px 28px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #9a8a75;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Jost', sans-serif;
+  margin-bottom: -1px;
+}
+
+.tab-btn.active, .tab-btn:hover {
+  color: var(--brown);
+  border-bottom-color: var(--gold);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.menu-cat { display: none; }
+.menu-cat.active { display: contents; }
+
+.menu-item {
+  background: white;
+  padding: 28px 24px;
+  text-align: left;
+  border: 1px solid #ede5d8;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--gold);
+  transition: width 0.4s;
+}
+
+.menu-item:hover::before { width: 100%; }
+.menu-item:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(74,46,18,0.1); }
+
+.item-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+
+.item-desc {
+  font-size: 12px;
+  color: #9a8a75;
+  line-height: 1.6;
+  font-weight: 300;
+  margin-bottom: 14px;
+}
+
+.item-price {
+  font-size: 15px;
+  color: var(--gold);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+/* ── GALLERY ── */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 240px 240px;
+}
+
+.gallery-item {
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-item:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.gallery-item:hover img { transform: scale(1.07); }
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26,18,8,0);
+  transition: background 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-item:hover .gallery-overlay { background: rgba(26,18,8,0.3); }
+
+/* ── EXPERIENCE ── */
+.experience {
+  background: var(--dark);
+  padding: 100px 40px;
+  text-align: center;
+}
+
+.experience .section-title { color: var(--cream); margin-bottom: 60px; }
+
+.exp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #2a1a08;
+}
+
+.exp-card {
+  background: #0e0a04;
+  padding: 44px 32px;
+  transition: background 0.3s;
+}
+
+.exp-card:hover { background: #1a1008; }
+
+.exp-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.exp-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: var(--cream);
+  margin-bottom: 10px;
+}
+
+.exp-desc {
+  font-size: 13px;
+  color: #6a5a45;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ── HOURS + MAP ── */
+.info-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.hours-block {
+  background: var(--cream);
+  padding: 80px 60px;
+}
+
+.hours-block .section-title { color: var(--dark); margin-bottom: 40px; }
+
+.hours-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hours-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e0d4c0;
+  font-size: 14px;
+}
+
+.day-name { color: var(--brown); font-weight: 500; letter-spacing: 0.05em; }
+.day-time { color: #7a6a55; font-weight: 300; }
+.closed { color: #c0a880; font-style: italic; }
+
+.address-block {
+  background: var(--mocha);
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.address-block .section-tag { color: #e8c882; }
+.address-block .section-title { color: white; }
+
+.address-text {
+  font-size: 15px;
+  color: #d4b88a;
+  line-height: 1.8;
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #e8c882;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(232,200,130,0.4);
+  padding-bottom: 4px;
+  transition: all 0.3s;
+}
+
+.map-link:hover { color: white; border-bottom-color: white; }
+
+/* ── FOOTER ── */
+footer {
+  background: #0a0704;
+  padding: 60px 40px 32px;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  color: var(--gold);
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+.footer-tagline {
+  font-size: 12px;
+  letter-spacing: 0.25em;
+  color: #4a3a28;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #5a4a35;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: var(--gold); }
+
+.footer-bottom {
+  font-size: 11px;
+  color: #3a2a18;
+  padding-top: 24px;
+  border-top: 1px solid #1e1208;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .about { grid-template-columns: 1fr; }
+  .about-img { min-height: 280px; }
+  .about-content { padding: 50px 24px; }
+  .about-stats { gap: 24px; }
+
+  .menu-section { padding: 70px 20px; }
+
+  .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .gallery-item:first-child { grid-column: span 2; grid-row: span 1; height: 220px; }
+  .gallery-item { height: 160px; }
+
+  .info-section { grid-template-columns: 1fr; }
+  .hours-block, .address-block { padding: 50px 24px; }
+
+  .experience { padding: 70px 20px; }
+  .exp-grid { grid-template-columns: 1fr 1fr; }
+
+  footer { padding: 50px 20px 24px; }
+}
+
+@media (max-width: 480px) {
+  .exp-grid { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr; }
+  .gallery-item:first-child { grid-column: span 1; height: 220px; }
+  .gallery-item { height: 180px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Evanza</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#menu" onclick="toggleMenu()">Menu</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#visit" onclick="toggleMenu()">Visit Us</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-tag">Welcome to Evanza Café · Ahmedabad</p>
+  <h1 class="hero-title">Where Every<br><em>Sip</em> Tells<br>a Story</h1>
+  <p class="hero-sub">A warm haven in the heart of Drive-In Road, crafted for those who seek more than just coffee.</p>
+  <div class="hero-cta">
+    <a href="#menu" class="btn btn-gold">Explore Menu</a>
+    <a href="#visit" class="btn btn-outline">Find Us</a>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-img"></div>
+  <div class="about-content">
+    <p class="section-tag reveal">Our Story</p>
+    <h2 class="section-title reveal">More Than a <em>Café</em>,<br>It's a Feeling</h2>
+    <p class="about-text reveal">Evanza Café was born from a simple belief — that great coffee, honest food, and a welcoming space can transform an ordinary day into something memorable.</p>
+    <p class="about-text reveal">Nestled near Gurukul on Drive-In Road, we've become the go-to corner for Ahmedabad's students, professionals, and families who crave quality in every cup and comfort in every corner.</p>
+    <div class="about-stats reveal">
+      <div>
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Menu Items</div>
+      </div>
+      <div>
+        <div class="stat-num">★ 4.8</div>
+        <div class="stat-label">Rating</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Freshly Made</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <p class="section-tag">Crafted For You</p>
+  <h2 class="section-title">Our <em>Menu</em></h2>
+
+  <div class="menu-tabs">
+    <button class="tab-btn active" onclick="switchTab('coffee', this)">Coffee</button>
+    <button class="tab-btn" onclick="switchTab('shakes', this)">Shakes & Coolers</button>
+    <button class="tab-btn" onclick="switchTab('food', this)">Food</button>
+    <button class="tab-btn" onclick="switchTab('desserts', this)">Desserts</button>
+  </div>
+
+  <div class="menu-grid">
+    <!-- Coffee -->
+    <div class="menu-cat active" id="cat-coffee">
+      <div class="menu-item reveal">
+        <div class="item-name">Evanza Signature Brew</div>
+        <div class="item-desc">Our house blend — rich, bold, and perfectly balanced with a smooth finish.</div>
+        <div class="item-price">₹ 149</div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="item-name">Cold Brew Tonic</div>
+        <div class="item-desc">18-hour steeped cold brew over Indian tonic water with a citrus twist.</div>
+        <div class="item-price">₹ 199</div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="item-name">Caramel Latte</div>
+        <div class="item-desc">Silky espresso with steamed milk and house-made caramel drizzle.</div>
+        <div class="item-price">₹ 179</div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="item-name">Masala Chai Latte</div>
+        <div class="item-desc">Aromatic spiced tea blended with frothy milk — a desi classic, elevated.</div>
+        <div class="item-price">₹ 129</div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="item-name">Hazelnut Cappuccino</div>
+        <div class="item-desc">Double shot espresso with hazelnut syrup and velvety microfoam art.</div>
+        <div class="item-price">₹ 169</div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="item-name">Affogato</div>
+        <div class="item-desc">Vanilla gelato drowned in a fresh hot espresso shot. Pure indulgence.</div>
+        <div class="item-price">₹ 219</div>
+      </div>
+    </div>
+
+    <!-- Shakes -->
+    <div class="menu-cat" id="cat-shakes">
+      <div class="menu-item reveal">
+        <div class="item-name">Belgian Choco Shake</div>
+        <div class="item-desc">Rich Belgian chocolate blended with ice cream and topped with whipped cream.</div>
+        <div class="item-price">₹ 229</div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="item-name">Strawberry Burst</div>
+        <div class="item-desc">Fresh strawberries, vanilla ice cream, and a strawberry drizzle.</div>
+        <div class="item-price">₹ 199</div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="item-name">Mango Lassi Cooler</div>
+        <div class="item-desc">Thick Alphonso mango blended with chilled yogurt and a pinch of cardamom.</div>
+        <div class="item-price">₹ 169</div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="item-name">Blueberry Lemonade</div>
+        <div class="item-desc">Fresh lemon, blueberry compote, and sparkling water — refreshingly vibrant.</div>
+        <div class="item-price">₹ 159</div>
+      </div>
+    </div>
+
+    <!-- Food -->
+    <div class="menu-cat" id="cat-food">
+      <div class="menu-item reveal">
+        <div class="item-name">Avocado Toast</div>
+        <div class="item-desc">Sourdough, smashed avocado, cherry tomatoes, microgreens, and chilli flakes.</div>
+        <div class="item-price">₹ 249</div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="item-name">Paneer Tikka Sandwich</div>
+        <div class="item-desc">Grilled spiced paneer with mint chutney in toasted multigrain bread.</div>
+        <div class="item-price">₹ 219</div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="item-name">Pesto Pasta</div>
+        <div class="item-desc">Al dente pasta tossed in fresh basil pesto with cherry tomatoes and parmesan.</div>
+        <div class="item-price">₹ 279</div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="item-name">Loaded Nachos</div>
+        <div class="item-desc">Crispy tortilla chips with cheese sauce, jalapeños, sour cream and salsa.</div>
+        <div class="item-price">₹ 239</div>
+      </div>
+    </div>
+
+    <!-- Desserts -->
+    <div class="menu-cat" id="cat-desserts">
+      <div class="menu-item reveal">
+        <div class="item-name">Dark Choco Lava Cake</div>
+        <div class="item-desc">Warm molten chocolate cake with a gooey centre and vanilla ice cream.</div>
+        <div class="item-price">₹ 249</div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="item-name">Tiramisu</div>
+        <div class="item-desc">Classic Italian layers of espresso-soaked ladyfingers and mascarpone cream.</div>
+        <div class="item-price">₹ 229</div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="item-name">Cheesecake Slice</div>
+        <div class="item-desc">New York style baked cheesecake with a buttery biscuit base and berry coulis.</div>
+        <div class="item-price">₹ 199</div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="item-name">Brownie Sundae</div>
+        <div class="item-desc">Warm fudge brownie, two scoops of gelato, hot chocolate sauce and nuts.</div>
+        <div class="item-price">₹ 219</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="gallery">
+  <div class="gallery-item">
+    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&q=80" alt="Cafe interior">
+    <div class="gallery-overlay"></div>
+  </div>
+  <div class="gallery-item">
+    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80" alt="Coffee">
+    <div class="gallery-overlay"></div>
+  </div>
+  <div class="gallery-item">
+    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Food">
+    <div class="gallery-overlay"></div>
+  </div>
+  <div class="gallery-item">
+    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&q=80" alt="Dessert">
+    <div class="gallery-overlay"></div>
+  </div>
+  <div class="gallery-item">
+    <img src="https://images.unsplash.com/photo-1572119865084-43c285814d63?w=600&q=80" alt="Latte art">
+    <div class="gallery-overlay"></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience">
+  <p class="section-tag">Why Evanza</p>
+  <h2 class="section-title">The <em>Evanza</em> Experience</h2>
+  <div class="exp-grid">
+    <div class="exp-card reveal">
+      <div class="exp-icon">☕</div>
+      <div class="exp-title">Artisan Coffee</div>
+      <div class="exp-desc">Sourced from premium Indian & global estates, brewed by trained baristas.</div>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-icon">🌿</div>
+      <div class="exp-title">Fresh Ingredients</div>
+      <div class="exp-desc">Everything on our menu is made fresh daily — no preservatives, no shortcuts.</div>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-icon">🛋️</div>
+      <div class="exp-title">Cozy Ambiance</div>
+      <div class="exp-desc">Warm lighting, comfortable seating — perfect for work, dates, or catching up.</div>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-icon">📶</div>
+      <div class="exp-title">High-Speed WiFi</div>
+      <div class="exp-desc">Free fast WiFi for students and remote workers — your second office awaits.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS + ADDRESS -->
+<section class="info-section" id="visit">
+  <div class="hours-block">
+    <p class="section-tag reveal">Plan Your Visit</p>
+    <h2 class="section-title reveal">Opening <em>Hours</em></h2>
+    <ul class="hours-list reveal">
+      <li><span class="day-name">Monday – Friday</span><span class="day-time">8:00 AM – 10:00 PM</span></li>
+      <li><span class="day-name">Saturday</span><span class="day-time">8:00 AM – 11:00 PM</span></li>
+      <li><span class="day-name">Sunday</span><span class="day-time">9:00 AM – 11:00 PM</span></li>
+    </ul>
+  </div>
+
+  <div class="address-block">
+    <p class="section-tag">Find Us</p>
+    <h2 class="section-title">We're Easy<br>to <em>Find</em></h2>
+    <p class="address-text">
+      Ground Floor, Nr Gurukul,<br>
+      03, Sankalp Square,<br>
+      Drive In Rd, Ahmedabad,<br>
+      Gujarat – 380052
+    </p>
+    <a href="https://maps.google.com/?q=Sankalp+Square+Drive+In+Road+Ahmedabad" target="_blank" class="map-link">
+      → Open in Google Maps
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Evanza</div>
+  <p class="footer-tagline">Where Every Sip Tells a Story</p>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#menu">Menu</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#visit">Visit Us</a>
+  </div>
+  <p class="footer-bottom">© 2026 Evanza Café, Ahmedabad. All rights reserved.</p>
+</footer>
+
+<script>
+// Mobile menu
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// Menu tabs
+function switchTab(cat, btn) {
+  document.querySelectorAll('.menu-cat').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('cat-' + cat).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Close mobile menu on outside click
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('mobileMenu');
+  if (!e.target.closest('nav') && !e.target.closest('#mobileMenu')) {
+    menu.classList.remove('open');
+  }
+});
+</script>
+</body>
+</html>
